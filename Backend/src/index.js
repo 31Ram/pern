@@ -1,50 +1,29 @@
-// const express = require("express");
-// const cors = require("cors");
-// const morgan = require("morgan");
-
-// const pool = require("./db");
-
-
-// const routes = require('./routes/routes.js');
-
-// const app = express();
-
-// app.use(express.json());
-// app.use(morgan("dev"));
-
-// app.use(routes);
-
-// app.get("/", (req, res) => {
-//   pool
-//   .query("SELECT * FROM user_info")
-//   .then((result) => res.json(result.rows))
-//   .catch((e) => console.error(e));
-//   });
-
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}.`);
-// });
-
+// Requires
+const routes = require("./routes/routes");
+const bodyParser = require("body-parser");
 const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+
 const app = express();
 
-const bodyParser = require("body-parser");
+// Middlewares
+app.use(cors());
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const { Pool } = require("pg");
+// Routes
+app.use(routes);
 
-const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'language_buddy',
-    password: 'Cali',
-    port: 5432
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to language buddy Migracode!!!." });
 });
 
-app.get('/', (req, res) => {
-  pool.query('select * from user_info', (error, result) => {
-      res.json(result.rows)
-  })
-})
-app.listen(3000, () => console.log("Server is up and running"));
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});

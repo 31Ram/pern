@@ -1,1 +1,0 @@
-// archivo de configuracion con la conexion a la bd, variables

@@ -5,4 +5,4 @@
 2. npm i express morgan cors ---> Dependencias principales para instanciar el proyecto.
 3. npm i nodemon -D ---> Paquetes utilizadas en el desarrollo.
 4. npm i pg --> paque utilizado para conectarse a postgre.
-
+5. npm i dotenv jsonwebtoken bcrypt
