@@ -1,6 +1,3 @@
-drop database language_buddy;
-create database language_buddy;
-
 drop  table if exists user_info cascade;
 drop  table if exists languages cascade;
 drop  table if exists language_level cascade;
@@ -10,7 +7,7 @@ drop  table if exists language_wanted cascade;
 CREATE TABLE user_info (
 	id serial primary key NOT NULL,
 	username varchar(30) NOT null UNIQUE,
-	email VARCHAR(120) NOT NULL UNIQUE,
+	email VARCHAR(120) NOT null UNIQUE,
 	password varchar(100) NOT null,
 	full_name varchar(40) NOT NULL,
 	date_of_birth DATE NOT NULL,
@@ -88,5 +85,13 @@ join user_info on language_offered.username = user_info.id
 join languages on language_offered.language_id = languages.id
 join language_level on language_offered.user_level = language_level.id;
 
+select user_info.username, user_info.nationality  ,user_info.description , languages.language_name , language_level.levels, user_info.id  
+from user_info
+join language_offered on user_info.id = language_offered.username
+join languages on language_offered.language_id = languages.id
+join language_level on language_offered.user_level = language_level.id;
+
+
 select * from languages;
 select * from user_info;
+select * from language_level;
